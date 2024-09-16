@@ -1,8 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using BenchmarkDotNet.Attributes;
 
+namespace Benchmarks;
+
 [MemoryDiagnoser]
-public class MyClass
+public class StringBenchmarks
 {
     private static readonly IEnumerable<string> ListStrings = Enumerable.Range(0, 10000).Select(x => new Guid().ToString());
 
