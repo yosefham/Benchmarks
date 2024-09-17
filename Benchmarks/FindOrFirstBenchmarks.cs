@@ -2,26 +2,40 @@
 
 namespace Benchmarks;
 
+public record IntWrapper(int Value);
+
 [MemoryDiagnoser]
 public class FindOrFirstBenchmarks
 {
-    private readonly List<int> _array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    private readonly List<int> _numbers = Enumerable.Range(0, 1000).ToList();
+    private readonly List<IntWrapper> _wrapperNumbers = Enumerable.Range(0, 1000).Select(x => new IntWrapper(x)).ToList();
 
     [Benchmark]
-    public void Find()
+    public int FindRaw()
     {
-        var value = _array.Find(x => x == 4);
+        return _numbers.Find(x => x == 500);
     }
     
     [Benchmark]
-    public void FirstOrDefault()
+    public int FirstOrDefaultRaw()
     {
-        var value = _array.FirstOrDefault(x => x == 4);
+        return _numbers.FirstOrDefault(x => x == 500);
     }
     
     [Benchmark]
-    public void First()
+    public IntWrapper? FindWrapped()
     {
-        var value = _array.First(x => x == 4);
+        return _wrapperNumbers.Find(x => x.Value == 500);
     }
+    
+    [Benchmark]
+    public IntWrapper? FirstOrDefaultWrapped()
+    {
+        return _wrapperNumbers.FirstOrDefault(x => x.Value == 500);
+    }
+    // [Benchmark]
+    // public void First()
+    // {
+    //     var value = _array.First(x => x == 4);
+    // }
 }
