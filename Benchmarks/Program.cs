@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
 using Benchmarks;
 
-BenchmarkRunner.Run<FindOrFirstBenchmarks>();
+BenchmarkRunner.Run<NestedLoops>();
 
